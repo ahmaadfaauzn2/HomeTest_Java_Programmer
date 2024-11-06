@@ -2,6 +2,8 @@ package com.example.hometestnew.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class Service {
@@ -52,6 +54,10 @@ public class Service {
     public double getServiceTariff() {
         return serviceTariff;
     }
+
+    @OneToMany(mappedBy = "service")
+    private List<User> users; // This defines the inverse relationship if needed
+
 
     public void setServiceTariff(int serviceTariff) {
         this.serviceTariff = serviceTariff;
