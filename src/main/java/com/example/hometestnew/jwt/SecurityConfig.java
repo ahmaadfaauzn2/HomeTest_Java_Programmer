@@ -25,6 +25,17 @@ public class SecurityConfig {
 //    private static final Logger logger = (Logger) LoggerFactory.getLogger(SecurityConfig.class);
 
 
+    @Bean
+    public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
+        StrictHttpFirewall firewall = new StrictHttpFirewall();
+        firewall.setAllowUrlEncodedPercent(true);  // Allow URL encoded %
+        firewall.setAllowUrlEncodedSlash(true);    // Allow URL encoded /
+        firewall.setAllowBackSlash(true);          // Allow backslash
+        firewall.setAllowSemicolon(true);          // Allow semicolon
+        firewall.setAllowUrlEncodedDoubleSlash(true);  // Allow double slash
+        return firewall;
+    }
+
     // Bean to configure CORS in Spring Security
     @Bean
     public CorsConfigurationSource customCorsConfigurationSource() {
