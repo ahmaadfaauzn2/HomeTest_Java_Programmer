@@ -21,12 +21,14 @@ import java.util.logging.Logger;
 
 public class SecurityConfig {
 //    private static final Logger logger = (Logger) LoggerFactory.getLogger(SecurityConfig.class);
-        @Bean
-        public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
-            StrictHttpFirewall firewall = new StrictHttpFirewall();
-            firewall.setAllowUrlEncodedPercent(true); // Allows % encoded characters
-            return firewall;
-        }
+       @Bean
+public HttpFirewall allowUrlEncodedCharactersHttpFirewall() {
+    StrictHttpFirewall firewall = new StrictHttpFirewall();
+    firewall.setAllowUrlEncodedPercent(true); // Allow % encoded characters
+    firewall.setAllowUrlEncodedSlash(true);   // Allow URL encoded slashes
+    // Consider other settings based on your requirements
+    return firewall;
+}
 
 
     // Bean to configure CORS in Spring Security
