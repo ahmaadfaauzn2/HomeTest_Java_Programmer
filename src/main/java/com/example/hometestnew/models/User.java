@@ -233,7 +233,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "service_id", referencedColumnName = "id", nullable = false)
-    private Service service; // Relationship with Service
+    private Service service; // Foreign key to Service
 
     public void setCreatedOn(ZonedDateTime createdOn) {
         this.createdOn = createdOn;
