@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -23,8 +25,6 @@ import java.util.logging.Logger;
 
 public class SecurityConfig {
 //    private static final Logger logger = (Logger) LoggerFactory.getLogger(SecurityConfig.class);
-
-
     @Bean
     public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
         StrictHttpFirewall firewall = new StrictHttpFirewall();
@@ -56,6 +56,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .requestMatchers("/login", "/registration", "/profile", "/profile/update", "/profile/image", "/banner", "/services", "/balance", "/topup", "/transaction", "/transaction/history", "/v1/api-docs", "/v2/api-docs", "/v3/api-docs","/v3/api-docs/**", "/swagger-resources", "/swagger-resources/**", "/configuration/ui", "/configuration/security", "/swagger-ui/**", "/webjars/**", "/swagger-ui.html", "/auth-controller/**", "/error").permitAll()
                 .anyRequest().authenticated()
+
                 .and()
                 .csrf(csrf -> csrf.disable());
         return http.build();
