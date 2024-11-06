@@ -27,9 +27,9 @@ public class SecurityConfig {
 
     // Bean to configure CORS in Spring Security
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
+    public CorsConfigurationSource customCorsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("https://hometestjavaprogrammer-production.up.railway.app"); // Add your frontend URL or "*" for all origins
+        configuration.addAllowedOrigin("https://hometestjavaprogrammer-production.up.railway.app");
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
