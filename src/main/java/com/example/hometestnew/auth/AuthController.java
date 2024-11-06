@@ -95,8 +95,6 @@ public class AuthController {
 
     // Endpoint Register
     @Transactional
-   // Endpoint Register
-    @Transactional
     @PostMapping("/registration")
     public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody User user) {
         // Validate the email format
