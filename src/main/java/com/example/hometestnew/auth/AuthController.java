@@ -95,34 +95,34 @@ public class AuthController {
 
     // Endpoint Register
     @Transactional
-    @PostMapping("/registration")
-    public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody User user) {
-        // Validate the email format
-        if (!user.getEmail().contains("@")) {
-            return createErrorResponse(HttpStatus.BAD_REQUEST, 102, "Format email tidak valid");
-        }
-
-        user.setBalance(0); // Set default balance for new user
-
-        // Create a Service instance and set the service tariff
-        Service service = new Service();
-        service.setServiceTariff(0); // Set default service tariff
-        // Optionally, set other fields of the Service object (e.g., serviceCode, serviceName, etc.)
-
-        // Save the Service object first
-        serviceRepository.save(service); // Assuming you have a serviceRepository to save the Service
-
-        // Associate the Service with the User
-        user.setService(service);
-
-        createUserProfileData(user);
-
-        // Save the User to the database
-        userRepository.save(user);
-
-        // Respond with a success message if registration is successful
-        return ResponseEntity.ok(new ApiResponse(0, "Registrasi berhasil silahkan login", null));
+   @PostMapping("/registration")
+public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody User user) {
+    // Validate the email format
+    if (!user.getEmail().contains("@")) {
+        return createErrorResponse(HttpStatus.BAD_REQUEST, 102, "Format email tidak valid");
     }
+
+    user.setBalance(0); // Set default balance for new user
+
+    // Create a Service instance and set the service tariff
+    Service service = new Service();
+    service.setServiceTariff(0); // Set default service tariff
+
+    // Save the Service object first
+    serviceRepository.save(service); // Save Service object
+
+    // Associate the Service with the User
+    user.setService(service);
+
+    createUserProfileData(user);
+
+    // Save the User to the database
+    userRepository.save(user);
+
+    // Respond with a success message if registration is successful
+    return ResponseEntity.ok(new ApiResponse(0, "Registrasi berhasil silahkan login", null));
+}
+
 
 
     // Endpoint Profile
