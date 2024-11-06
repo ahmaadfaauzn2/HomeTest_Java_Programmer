@@ -99,12 +99,24 @@ public class AuthController {
         if (!user.getEmail().contains("@")) {
             return createErrorResponse(HttpStatus.BAD_REQUEST, 102, "Format email tidak valid");
         }
-        user.setBalance(0); // Set default balance when creating a new user
+
+        // Set default values for the user
+        user.setBalance(0); // Set default balance for new user
+
+        // Create a Service instance and set the service tariff
+        Service service = new Service();
+        service.setServiceTariff(0); // Set default service tariff, or fetch an existing Service object
+        // Optionally, set other fields of the Service object (e.g., serviceCode, serviceName, etc.)
+
+        // Associate the Service with the User (if needed, depending on your DB schema)
+        user.setService(service);
+
+        createUserProfileData(user);
 
         // Save the user to the database
         userRepository.save(user);
 
-        //Respond with a success message if the registration is successful
+        // Respond with a success message if registration is successful
         return ResponseEntity.ok(new ApiResponse(0, "Registrasi berhasil silahkan login", null));
     }
 
