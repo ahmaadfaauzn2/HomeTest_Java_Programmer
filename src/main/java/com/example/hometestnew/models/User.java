@@ -223,6 +223,18 @@ public class User {
         return List.of(() -> "ROLE_USER"); // Example: replace with your actual roles
     }
 
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "service_id", referencedColumnName = "id", nullable = false)
+    private Service service; // Relationship with Service
+
     public void setCreatedOn(ZonedDateTime createdOn) {
         this.createdOn = createdOn;
     }
